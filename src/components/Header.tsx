@@ -1,7 +1,7 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import Container from '../ui/Container'
-import styled from 'styled-components'
+import React from 'react';
+import { Link } from 'react-router-dom';
+import Container from '../ui/Container';
+import styled from 'styled-components';
 
 function Header(props: any) {
     return (
@@ -19,7 +19,7 @@ function Header(props: any) {
                 </div>
             </Container>
         </nav>
-    )
+    );
 }
 
 
@@ -50,4 +50,4 @@ export default styled(Header)`
             }
         }
     }          
-`
+`;

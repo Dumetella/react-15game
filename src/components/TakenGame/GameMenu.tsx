@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 interface GameMenuProps {
     onClick: () => void;
@@ -15,5 +15,5 @@ export default function GameMenu(props: GameMenuProps) {
             <div>{props.moves}</div>
             <div>{props.timer}</div>
         </div>
-    )
+    );
 }

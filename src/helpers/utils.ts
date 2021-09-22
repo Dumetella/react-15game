@@ -1,4 +1,4 @@
-import TileModel from "../model/TileModel";
+import TileModel from '../model/TileModel';
 
 /** 
  * Return an Array containing all numbers such that 0 = n <= length in
@@ -12,7 +12,7 @@ export const range = (length: number): Array<number> => {
         res.push(i);
     }
     return res;
-}
+};
 
 /**
  * Get a shuffled array from an original array based on Durstenfeld shuffle algorithm.
@@ -22,13 +22,13 @@ export const range = (length: number): Array<number> => {
  */
 
 export const randomSubarray = (arr: Array<number>): Array<number> => {
-    let shuffle = arr.slice();
+    const shuffle = arr.slice();
     for (let i = shuffle.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
         [shuffle[i], shuffle[j]] = [shuffle[j], shuffle[i]];
     }
-    return shuffle.slice()
-}
+    return shuffle.slice();
+};
 
 export const getField = (n: number): Array<TileModel> => {
     const aboba = randomSubarray(range(n * n - 1));
@@ -37,10 +37,10 @@ export const getField = (n: number): Array<TileModel> => {
             x: i % n,
             y: Math.floor(i / n),
             value: e,
-        }
+        };
     }), {
         x: n - 1,
         y: n - 1,
         value: -1,
-    }]
-}
+    }];
+};
