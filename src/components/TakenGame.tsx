@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import styled from 'styled-components';
 import { gameFactory } from '../helpers/gamefactory';
 import TileModel from '../model/TileModel'
 import Grid from './Grid'
@@ -8,18 +9,16 @@ import Grid from './Grid'
 
 interface GameProps {
     size: number
+    className?: string;
 }
 
-export default function Game(props: GameProps) {
+function TakenGame(props: GameProps) {
 
     const level = gameFactory(props.size);
     const originalLevel = level.slice();
 
     const [currentLevel, setCurrentLevel] = useState(originalLevel);
 
-    const onResetGameClick = () => {
-        setCurrentLevel(originalLevel);
-    }
 
     const onNewGameClick = () => {
         setCurrentLevel(gameFactory(4));
@@ -54,7 +53,7 @@ export default function Game(props: GameProps) {
     }
 
     return (
-        <div>
+        <div className={props.className}>
             <Grid
                 level={currentLevel}
                 onClick={(tile) => onClick(tile)}
@@ -62,3 +61,9 @@ export default function Game(props: GameProps) {
         </div>
     )
 }
+
+export default styled(TakenGame)`
+    display: flex;
+    justify-content: center;
+    margin-top: 100px;
+`

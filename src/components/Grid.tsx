@@ -23,16 +23,6 @@ function Grid(props: GridProps) {
 
 
 export default styled(Grid)`
-
- display: flex;
- flex-direction: column;
- align-items: center;
- justify-content: center;
- min-height: 800px;
- 
-
-.grid__row {
-     margin: 0;
-     padding: 0;
- }
+ position: relative;
+ min-width: 400px;
  `

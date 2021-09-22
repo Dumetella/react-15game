@@ -21,20 +21,18 @@ function Tile(props: TileProps) {
 export default styled(Tile)`
 
     border: 1px solid #FFD1AA;
-    width: 200px;
-    height: 200px;
+    width: 99px;
+    height: 98px;
     position: absolute;
-    left: ${props => props.data.x * 200}px;
-    top: ${props => props.data.y * 200}px;
+    justify-content: center;
+    left: ${props => props.data.x * 100}px;
+    top: ${props => props.data.y * 100}px;
     cursor: pointer;
     background-color: ${props => props.correct ? '#226666' : '#D4726a'};
     transition-property: top, left, background-color;
     transition-duration: .300s;
     transition-timing-function: ease-in;
     display: ${props => props.data.value === -1 ? 'none' : 'flex'};
-    justify-content: center;
-    text-align: center;
-    
     
     .tile__value {
         color: #FFD1AA;
@@ -44,5 +42,6 @@ export default styled(Tile)`
         display: flex;
         justify-content: center;
         align-items: center;
+        text-align: center;
     }
 `
