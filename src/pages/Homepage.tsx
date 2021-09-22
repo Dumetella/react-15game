@@ -1,5 +1,5 @@
-import React from 'react'
-import Container from '../ui/Container'
+import React from 'react';
+import Container from '../ui/Container';
 
 export default function Homepage() {
     return (
@@ -16,5 +16,5 @@ export default function Homepage() {
                 </div>
             </Container>
         </div>
-    )
+    );
 }

@@ -1,5 +1,5 @@
-import React from 'react'
-import Container from '../ui/Container'
+import React from 'react';
+import Container from '../ui/Container';
 
 export default function Footer() {
     return (
@@ -8,5 +8,5 @@ export default function Footer() {
                 ABOBA GAMES
             </Container>
         </footer>
-    )
+    );
 }

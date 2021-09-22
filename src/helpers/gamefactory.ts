@@ -15,4 +15,4 @@ const gameFactory = (size: number) => {
     return getField(size);
 };
 
-export { gameFactory }
+export { gameFactory };

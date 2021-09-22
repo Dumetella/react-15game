@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import TakenGameState from '../../enum/TakenGameState';
 import { gameFactory } from '../../helpers/gamefactory';
-import TileModel from '../../model/TileModel'
+import TileModel from '../../model/TileModel';
 import GameMenu from './GameMenu';
-import Grid from './Grid'
+import Grid from './Grid';
 
 
 interface GameProps {
@@ -19,76 +20,79 @@ function TakenGame(props: GameProps) {
     const [currentLevel, setCurrentLevel] = useState(originalLevel);
     const [totalMoves, setTotalMoves] = useState(0);
     const [totalSeconds, setTotalSeconds] = useState(0);
-    const [gameState, setGameState] = useState('GameInit')
+    const [gameState, setGameState] = useState(TakenGameState.NotStarted);
+    const [timer, setTimer] = useState<ReturnType<typeof setInterval> | null>(null);
 
 
     const onNewGameClick = () => {
-        setCurrentLevel(gameFactory(4));
+        setCurrentLevel(gameFactory(props.size));
         setTotalMoves(0);
         setTotalSeconds(0);
+        setGameState(TakenGameState.NotStarted);
+        timer && clearInterval(timer);
+        setTimer(null);
+    };
 
-    }
-
-    const isPuzzleSolved = () => {
-        const solvedTiles = currentLevel.filter((tile) => {
-            return tile.value === tile.y * 4 + tile.x + 1;
-        });
-        if (solvedTiles.length === 15) {
-            return true;
-        } else return false;
-    }
-
-    function setTimer() {
-        const timerId = setInterval(() => setTotalSeconds(totalSeconds => totalSeconds + 1), 1000);
-    }
+    const isPuzzleSolved = () => currentLevel.filter(c => c.value > 0).every(c => c.value === c.y * props.size + c.x + 1);
 
 
     const onClick = (tile: TileModel) => {
 
-        if (totalMoves === 0) {
-            setTimer();
+        if (gameState === TakenGameState.NotStarted) {
+            setGameState(TakenGameState.InProgress);
+            setTimer(setInterval(() => setTotalSeconds(totalSeconds => totalSeconds + 1), 1000));
         }
 
         const empty = currentLevel.find((e) => {
             return e.value === -1;
-        })
+        });
         if (!empty) {
-            return
-        };
+            return;
+        }
 
+        let moveValid = false;
         if (tile.y + 1 === empty.y && tile.x === empty.x) {
             [tile.y, empty.y] = [empty.y, tile.y];
-            setTotalMoves(totalMoves => totalMoves + 1);
-            if (isPuzzleSolved()) {
-                console.log('YOU WON!')
-            }
+            moveValid = true;
         }
         else if (tile.y - 1 === empty.y && tile.x === empty.x) {
             [tile.y, empty.y] = [empty.y, tile.y];
             setTotalMoves(totalMoves => totalMoves + 1);
-            if (isPuzzleSolved()) {
-                console.log('YOU WON!')
-            }
+            moveValid = true;
         }
         else if (tile.x + 1 === empty.x && tile.y === empty.y) {
             [tile.x, empty.x] = [empty.x, tile.x];
             setTotalMoves(totalMoves => totalMoves + 1);
-            if (isPuzzleSolved()) {
-                console.log('YOU WON!')
-            }
+            moveValid = true;
         }
         else if (tile.x - 1 === empty.x && tile.y === empty.y) {
             [tile.x, empty.x] = [empty.x, tile.x];
             setTotalMoves(totalMoves => totalMoves + 1);
+            moveValid = true;
+        }
+
+        if (moveValid) {
+            setTotalMoves(totalMoves => totalMoves + 1);
+            setCurrentLevel(currentLevel.slice());
+            
             if (isPuzzleSolved()) {
-                console.log('YOU WON!')
+                setGameState(TakenGameState.Solved);
+                timer && clearInterval(timer);
+                setTimer(null);
             }
         }
-        setCurrentLevel(currentLevel.slice())
-    }
+    };
 
     return (
         <div className={props.className}>
+            {
+                gameState === TakenGameState.Solved
+                ? <div>
+                    <h2>YOU WON</h2>
+                    <button onClick={() => onNewGameClick()}>Restart</button>
+                </div>
+                : null
+            }
             <GameMenu onClick={onNewGameClick}
                 moves={totalMoves}
                 timer={totalSeconds}
@@ -98,7 +102,7 @@ function TakenGame(props: GameProps) {
                 onClick={(tile) => onClick(tile)}
             />
         </div>
-    )
+    );
 }
 
 export default styled(TakenGame)`
@@ -106,7 +110,7 @@ export default styled(TakenGame)`
     flex-direction: column;
     justify-content: center;
     margin-top: 100px;
-`
+`;
 
 
 // useEffect(() => {

@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import TileModel from '../../model/TileModel';
 import styled from 'styled-components';
 
@@ -14,7 +14,7 @@ function Tile(props: TileProps) {
         <div className={props.className} onClick={() => props.onClick && props.onClick()}>
             <div className="tile__value">{props.data.value}</div>
         </div>
-    )
+    );
 }
 
 
@@ -44,4 +44,4 @@ export default styled(Tile)`
         align-items: center;
         text-align: center;
     }
-`
+`;
