@@ -1,5 +1,5 @@
 import React from 'react'
-import TileModel from '../model/TileModel'
+import TileModel from '../../model/TileModel'
 import Tile from './Tile'
 import styled from 'styled-components'
 

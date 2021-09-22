@@ -1,15 +1,12 @@
 import React from 'react';
-import TakenGame from '../components/TakenGame';
+import TakenGame from '../components/TakenGame/TakenGame';
 import Container from '../ui/Container';
-
-
-
 
 
 function Takenpage() {
 
   return (
-    <div className="taken-puzzle" style={{ minHeight: 1000 }}>
+    <div className="taken-puzzle" style={{ minHeight: 500 }}>
       <Container>
         <TakenGame size={4} />
       </Container>

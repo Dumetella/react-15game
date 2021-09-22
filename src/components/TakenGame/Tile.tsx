@@ -1,5 +1,5 @@
 import React from 'react'
-import TileModel from '../model/TileModel';
+import TileModel from '../../model/TileModel';
 import styled from 'styled-components';
 
 interface TileProps {
@@ -22,7 +22,7 @@ export default styled(Tile)`
 
     border: 1px solid #FFD1AA;
     width: 99px;
-    height: 98px;
+    height: 99px;
     position: absolute;
     justify-content: center;
     left: ${props => props.data.x * 100}px;
