@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import TakenGameState from '../../enum/TakenGameState';
-import { gameFactory } from '../../helpers/gamefactory';
-import TileModel from '../../model/TileModel';
+import TakenGameState from './enum/TakenGameState';
+import { gameFactory } from './helpers/gamefactory';
+import TileModel from './model/TileModel';
 import GameMenu from './GameMenu';
 import Grid from './Grid';
 
@@ -57,24 +57,21 @@ function TakenGame(props: GameProps) {
         }
         else if (tile.y - 1 === empty.y && tile.x === empty.x) {
             [tile.y, empty.y] = [empty.y, tile.y];
-            setTotalMoves(totalMoves => totalMoves + 1);
             moveValid = true;
         }
         else if (tile.x + 1 === empty.x && tile.y === empty.y) {
             [tile.x, empty.x] = [empty.x, tile.x];
-            setTotalMoves(totalMoves => totalMoves + 1);
             moveValid = true;
         }
         else if (tile.x - 1 === empty.x && tile.y === empty.y) {
             [tile.x, empty.x] = [empty.x, tile.x];
-            setTotalMoves(totalMoves => totalMoves + 1);
             moveValid = true;
         }
 
         if (moveValid) {
             setTotalMoves(totalMoves => totalMoves + 1);
             setCurrentLevel(currentLevel.slice());
-            
+
             if (isPuzzleSolved()) {
                 setGameState(TakenGameState.Solved);
                 timer && clearInterval(timer);
@@ -87,11 +84,11 @@ function TakenGame(props: GameProps) {
         <div className={props.className}>
             {
                 gameState === TakenGameState.Solved
-                ? <div>
-                    <h2>YOU WON</h2>
-                    <button onClick={() => onNewGameClick()}>Restart</button>
-                </div>
-                : null
+                    ? <div>
+                        <h2>YOU WON</h2>
+                        <button onClick={() => onNewGameClick()}>Restart</button>
+                    </div>
+                    : null
             }
             <GameMenu onClick={onNewGameClick}
                 moves={totalMoves}

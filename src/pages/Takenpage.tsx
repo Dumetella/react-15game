@@ -1,6 +1,6 @@
 import React from 'react';
-import TakenGame from '../components/TakenGame/TakenGame';
-import Container from '../ui/Container';
+import TakenGame from '../games/Taken/TakenGame';
+import Container from '../components/ui/Container';
 
 
 function Takenpage() {
