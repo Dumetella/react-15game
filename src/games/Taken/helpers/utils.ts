@@ -33,6 +33,7 @@ export const randomSubarray = (arr: Array<number>): Array<number> => {
 export const getField = (n: number): Array<TileModel> => {
 
     const field = randomSubarray(range(n * n - 1));
+
     if (inversionCounter(field) % 2 !== 0) {
         const tile1 = field.indexOf(1);
         const tile2 = field.indexOf(2);
@@ -56,7 +57,7 @@ export const getField = (n: number): Array<TileModel> => {
 const inversionCounter = (shuffle: Array<number>) => {
     let inversion_counter = 0;
     for (let i = 0; i < shuffle.length - 1; i++) {
-        for (let j = 0; j < shuffle.length; j++) {
+        for (let j = i + 1; j < shuffle.length; j++) {
             if (shuffle[j] && shuffle[i] && shuffle[i] > shuffle[j]) {
                 inversion_counter++;
             }
