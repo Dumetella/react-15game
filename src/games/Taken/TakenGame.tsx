@@ -98,7 +98,6 @@ class TakenGame extends React.Component<GameProps, GameState> {
         if (this.state.timer) {
             clearInterval(this.state.timer);
             this.setState({
-                ...this.state,
                 timer: null
             });
         }
