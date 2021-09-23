@@ -31,8 +31,15 @@ export const randomSubarray = (arr: Array<number>): Array<number> => {
 };
 
 export const getField = (n: number): Array<TileModel> => {
-    const aboba = randomSubarray(range(n * n - 1));
-    return [...aboba.map((e, i) => {
+
+    const field = randomSubarray(range(n * n - 1));
+    if (inversionCounter(field) % 2 !== 0) {
+        const tile1 = field.indexOf(1);
+        const tile2 = field.indexOf(2);
+        [field[tile1], field[tile2]] = [field[tile2], field[tile1]];
+    }
+    console.log(inversionCounter(field));
+    return [...field.map((e, i) => {
         return {
             x: i % n,
             y: Math.floor(i / n),
@@ -43,4 +50,17 @@ export const getField = (n: number): Array<TileModel> => {
         y: n - 1,
         value: -1,
     }];
+
+};
+
+const inversionCounter = (shuffle: Array<number>) => {
+    let inversion_counter = 0;
+    for (let i = 0; i < shuffle.length - 1; i++) {
+        for (let j = 0; j < shuffle.length; j++) {
+            if (shuffle[j] && shuffle[i] && shuffle[i] > shuffle[j]) {
+                inversion_counter++;
+            }
+        }
+    }
+    return inversion_counter;
 };
