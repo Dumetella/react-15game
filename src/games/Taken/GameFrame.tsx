@@ -21,6 +21,6 @@ export default styled(GameFrame)`
     min-width: 100vh;
     display: flex;
     justify-content: center;
-    margin-bottom: 10px;
+    margin: 100px 0px 10px 0px;
     box-sizing: border-box;
 `;

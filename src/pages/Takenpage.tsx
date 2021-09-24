@@ -7,13 +7,9 @@ import GameFrame from '../games/Taken/GameFrame';
 function Takenpage() {
 
   return (
-
-
     <GameFrame >
       <TakenGame size={4} />
     </GameFrame >
-
-
   );
 }
 

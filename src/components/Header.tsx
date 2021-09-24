@@ -10,18 +10,16 @@ interface HeaderProps {
 function Header(props: HeaderProps) {
     return (
         <nav className={props.className}>
-            <Container>
-                <div className="links__container">
-                    <ul className="links">
-                        <li className="links__item">
-                            <Link to="/">Home</Link>
-                        </li>
-                        <li className="links__item">
-                            <Link to="/taken-game">Taken-puzzle</Link>
-                        </li>
-                    </ul>
-                </div>
-            </Container>
+            <div className="links__container">
+                <ul className="links">
+                    <li className="links__item">
+                        <Link to="/">React Games</Link>
+                    </li>
+                    <li className="links__item">
+                        <Link to="/taken-game">Taken-puzzle</Link>
+                    </li>
+                </ul>
+            </div>
         </nav>
     );
 }
@@ -31,8 +29,9 @@ export default styled(Header)`
     width: 100%;
     position: sticky;
     top: 0px;
-    background-color: white;
+    background-color: rgb(232, 232, 232);
     z-index: 10;
+    box-sizing: border-box;
 
     .links {
         display: flex;

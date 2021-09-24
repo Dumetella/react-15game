@@ -42,7 +42,7 @@ class TakenGame extends React.Component<GameProps, GameState> {
 
     componentDidUpdate(): void {
         if (this.state.gameState !== TakenGameState.Solved && this.isPuzzleSolved(this.state.currentLevel)) {
-            this.setState({gameState: TakenGameState.Solved});
+            this.setState({ gameState: TakenGameState.Solved });
             this.stopTimer();
         }
     }
@@ -102,7 +102,7 @@ class TakenGame extends React.Component<GameProps, GameState> {
             });
         }
     }
-    
+
     private isPuzzleSolved(level: GameState['currentLevel']): boolean {
         return level.filter(c => c.value > 0).every(c => c.value === c.y * this.props.size + c.x + 1);
     }
@@ -124,7 +124,7 @@ class TakenGame extends React.Component<GameProps, GameState> {
             totalSeconds,
             gameState,
         } = this.state;
-        
+
         return (
             <div className={this.props.className}>
                 {
@@ -151,6 +151,5 @@ class TakenGame extends React.Component<GameProps, GameState> {
 export default styled(TakenGame)`
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    margin-top: 100px;
+    justify-content: flex-start;
 `;

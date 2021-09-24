@@ -1,12 +1,22 @@
 import React from 'react';
 import Container from './ui/Container';
+import styled from 'styled-components';
 
-export default function Footer() {
+interface FooterProps {
+    className?: string;
+}
+function Footer(props: FooterProps) {
     return (
-        <footer>
+        <footer className={props.className}>
             <Container>
-                ABOBA GAMES
+                React Games by Dumetella
             </Container>
         </footer>
     );
 }
+
+
+export default styled(Footer)`
+    position: relative;
+    bottom: 0;
+`;
