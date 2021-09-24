@@ -12,38 +12,56 @@ interface GameProps {
     className?: string;
 }
 
-function TakenGame(props: GameProps) {
+interface GameState {
+    currentLevel: ReturnType<typeof gameFactory>
+    totalMoves: number
+    totalSeconds: number
+    gameState: TakenGameState
+    timer: ReturnType<typeof setInterval> | null
+}
 
-    const level = gameFactory(props.size);
-    const originalLevel = level.slice();
+class TakenGame extends React.Component<GameProps, GameState> {
+    constructor(props: GameProps) {
+        super(props);
+        this.state = {
+            currentLevel: [],
+            totalMoves: 0,
+            totalSeconds: 0,
+            gameState: TakenGameState.NotStarted,
+            timer: null,
+        };
+    }
 
-    const [currentLevel, setCurrentLevel] = useState(originalLevel);
-    const [totalMoves, setTotalMoves] = useState(0);
-    const [totalSeconds, setTotalSeconds] = useState(0);
-    const [gameState, setGameState] = useState(TakenGameState.NotStarted);
-    const [timer, setTimer] = useState<ReturnType<typeof setInterval> | null>(null);
+    componentDidMount(): void {
+        this.gameReset();
+    }
 
+    componentWillUnmount(): void {
+        this.stopTimer();
+    }
 
-    const onNewGameClick = () => {
-        setCurrentLevel(gameFactory(props.size));
-        setTotalMoves(0);
-        setTotalSeconds(0);
-        setGameState(TakenGameState.NotStarted);
-        timer && clearInterval(timer);
-        setTimer(null);
-    };
+    componentDidUpdate(): void {
+        if (this.state.gameState !== TakenGameState.Solved && this.isPuzzleSolved(this.state.currentLevel)) {
+            this.setState({gameState: TakenGameState.Solved});
+            this.stopTimer();
+        }
+    }
 
-    const isPuzzleSolved = () => currentLevel.filter(c => c.value > 0).every(c => c.value === c.y * props.size + c.x + 1);
-
-
-    const onClick = (tile: TileModel) => {
-
-        if (gameState === TakenGameState.NotStarted) {
-            setGameState(TakenGameState.InProgress);
-            setTimer(setInterval(() => setTotalSeconds(totalSeconds => totalSeconds + 1), 1000));
+    private onTileClick(tile: TileModel): void {
+        if (this.state.gameState === TakenGameState.NotStarted) {
+            this.setState({
+                gameState: TakenGameState.InProgress,
+                timer: setInterval(() => {
+                    this.setState((oldState) => {
+                        return {
+                            totalSeconds: oldState.totalSeconds + 1
+                        };
+                    });
+                }, 1000),
+            });
         }
 
-        const empty = currentLevel.find((e) => {
+        const empty = this.state.currentLevel.find((e) => {
             return e.value === -1;
         });
         if (!empty) {
@@ -69,37 +87,65 @@ function TakenGame(props: GameProps) {
         }
 
         if (moveValid) {
-            setTotalMoves(totalMoves => totalMoves + 1);
-            setCurrentLevel(currentLevel.slice());
-
-            if (isPuzzleSolved()) {
-                setGameState(TakenGameState.Solved);
-                timer && clearInterval(timer);
-                setTimer(null);
-            }
+            this.setState({
+                totalMoves: this.state.totalMoves + 1,
+                currentLevel: this.state.currentLevel.slice(),
+            });
         }
-    };
+    }
 
-    return (
-        <div className={props.className}>
-            {
-                gameState === TakenGameState.Solved
-                    ? <div>
-                        <h2>YOU WON</h2>
-                        <button onClick={() => onNewGameClick()}>Restart</button>
-                    </div>
-                    : null
-            }
-            <GameMenu onClick={onNewGameClick}
-                moves={totalMoves}
-                timer={totalSeconds}
-            />
-            <Grid
-                level={currentLevel}
-                onClick={(tile) => onClick(tile)}
-            />
-        </div>
-    );
+    private stopTimer(): void {
+        if (this.state.timer) {
+            clearInterval(this.state.timer);
+            this.setState({
+                timer: null
+            });
+        }
+    }
+    
+    private isPuzzleSolved(level: GameState['currentLevel']): boolean {
+        return level.filter(c => c.value > 0).every(c => c.value === c.y * this.props.size + c.x + 1);
+    }
+
+    private gameReset(): void {
+        this.setState({
+            currentLevel: gameFactory(this.props.size),
+            totalMoves: 0,
+            totalSeconds: 0,
+            gameState: TakenGameState.NotStarted,
+        });
+        this.stopTimer();
+    }
+
+    render(): JSX.Element {
+        const {
+            currentLevel,
+            totalMoves,
+            totalSeconds,
+            gameState,
+        } = this.state;
+        
+        return (
+            <div className={this.props.className}>
+                {
+                    gameState === TakenGameState.Solved
+                        ? <div>
+                            <h2>YOU WON</h2>
+                            <button onClick={() => this.gameReset()}>Restart</button>
+                        </div>
+                        : null
+                }
+                <GameMenu onClick={() => this.gameReset()}
+                    moves={totalMoves}
+                    timer={totalSeconds}
+                />
+                <Grid
+                    level={currentLevel}
+                    onClick={(tile) => this.onTileClick(tile)}
+                />
+            </div>
+        );
+    }
 }
 
 export default styled(TakenGame)`
@@ -108,11 +154,3 @@ export default styled(TakenGame)`
     justify-content: center;
     margin-top: 100px;
 `;
-
-
-// useEffect(() => {
-//     const timerId = setInterval(() => setTotalSeconds(totalSeconds + 1), 1000);
-//     return () => {
-//         clearInterval(timerId)
-//     };
-// });
