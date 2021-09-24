@@ -19,4 +19,5 @@ function Footer(props: FooterProps) {
 export default styled(Footer)`
     position: relative;
     bottom: 0;
+    background-color: rgb(232, 232, 232);
 `;

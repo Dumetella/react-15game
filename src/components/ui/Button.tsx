@@ -1,8 +1,12 @@
 import React from 'react';
 
-export default function Button() {
+interface ButtonProps {
+    className?: string;
+}
+
+export default function Button(props: ButtonProps) {
     return (
-        <div>
+        <div className={props.className}>
 
         </div>
     );

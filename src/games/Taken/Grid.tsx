@@ -24,6 +24,6 @@ function Grid(props: GridProps) {
 
 export default styled(Grid)`
  position: relative;
- min-width: 500px;
- min-height: 500px;
+ min-width: 400px;
+ min-height: 400px;
  `;
