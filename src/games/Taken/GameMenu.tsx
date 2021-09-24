@@ -1,19 +1,25 @@
 import React from 'react';
+import styled from 'styled-components';
 
 interface GameMenuProps {
     onClick: () => void;
     moves: number;
     timer: number;
+    className?: string;
 }
 
-export default function GameMenu(props: GameMenuProps) {
+function GameMenu(props: GameMenuProps) {
     return (
-        <div>
+        <div className={props.className}>
             <button onClick={props.onClick}>
                 NEW GAME
             </button>
-            <div>{props.moves}</div>
-            <div>{props.timer}</div>
+            <div>Number of moves:{props.moves}</div>
+            <div>Time:{props.timer}</div>
         </div>
     );
 }
+
+export default styled(GameMenu)`
+    display:flex;
+`;

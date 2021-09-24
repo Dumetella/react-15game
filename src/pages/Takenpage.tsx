@@ -1,16 +1,19 @@
 import React from 'react';
 import TakenGame from '../games/Taken/TakenGame';
 import Container from '../components/ui/Container';
+import GameFrame from '../games/Taken/GameFrame';
 
 
 function Takenpage() {
 
   return (
-    <div className="taken-puzzle" style={{ minHeight: 500 }}>
-      <Container>
-        <TakenGame size={4} />
-      </Container>
-    </div>
+
+
+    <GameFrame >
+      <TakenGame size={4} />
+    </GameFrame >
+
+
   );
 }
 

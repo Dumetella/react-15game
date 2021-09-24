@@ -3,7 +3,11 @@ import { Link } from 'react-router-dom';
 import Container from './ui/Container';
 import styled from 'styled-components';
 
-function Header(props: any) {
+interface HeaderProps {
+    className?: string;
+}
+
+function Header(props: HeaderProps) {
     return (
         <nav className={props.className}>
             <Container>
