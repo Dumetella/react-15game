@@ -9,7 +9,7 @@ import styled from 'styled-components';
 
 
 
-function App() {
+function App(): JSX.Element {
 
   return (
     <Router>

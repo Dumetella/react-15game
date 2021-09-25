@@ -6,7 +6,7 @@ import { getField } from './utils';
  * @returns {Object} TileSet object representing the level
  */
 
-const gameFactory = (size: number) => {
+const gameFactory = (size: number): ReturnType<typeof getField> => {
 
     if (size < 3 || size > 10) {
         throw new Error(`Cannot generate level of size: <${size}>`);

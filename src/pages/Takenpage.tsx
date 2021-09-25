@@ -4,7 +4,7 @@ import Container from '../components/ui/Container';
 import GameFrame from '../games/Taken/GameFrame';
 
 
-function Takenpage() {
+function Takenpage(): JSX.Element {
 
   return (
     <GameFrame >

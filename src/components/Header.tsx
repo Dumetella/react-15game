@@ -6,7 +6,7 @@ import Container from './ui/Container';
 
 
 
-export default function Header() {
+export default function Header(): JSX.Element {
     return (
         <Nav>
             <LinksContainer>
