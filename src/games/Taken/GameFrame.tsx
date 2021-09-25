@@ -14,8 +14,6 @@ function GameFrame(props: GameFrameProps) {
     );
 }
 
-
-
 export default styled(GameFrame)`
     min-height: calc(100vh - 160px);
     min-width: 100vh;
@@ -23,4 +21,5 @@ export default styled(GameFrame)`
     justify-content: center;
     margin: 100px 0px 10px 0px;
     box-sizing: border-box;
+    
 `;
