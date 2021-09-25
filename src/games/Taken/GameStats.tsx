@@ -1,34 +1,33 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Stats, StatsItem, StatsValue, Svg, SvgContainer } from './style/GameStatsStyle';
 
 interface GameStatsProps {
     moves: number;
     timer: number;
-    className?: string;
 }
 
-function GameStats(props: GameStatsProps): JSX.Element {
+export default function GameStats(props: GameStatsProps): JSX.Element {
     return (
-        <div className={props.className}>
-            <div className="stats">
-                <div className="stats__item">
-                    <div>Number of moves: {props.moves}</div>
-                </div>
-                <div className="stats__item">
-                    <div>Time elapsed: {props.timer}</div>
-                </div>
-            </div>
-        </div>
+        <Stats>
+            <StatsItem>
+                <SvgContainer>
+                    <Svg viewBox="0 0 24 24">
+                        <path d="M9.01 14H2v2h7.01v3L13 15l-3.99-4v3zm5.98-1v-3H22V8h-7.01V5L11 9l3.99 4z"></path>
+                    </Svg>
+                </SvgContainer>
+                <StatsValue>Number of moves: {props.moves}</StatsValue>
+            </StatsItem>
+            <StatsItem>
+                <SvgContainer>
+                    <Svg viewBox="0 0 24 24">
+                        <path d="M22 5.72l-4.6-3.86-1.29 1.53 4.6 3.86L22 5.72zM7.88 3.39L6.6 1.86 2 5.71l1.29 1.53 4.59-3.85zM12.5 8H11v6l4.75 2.85.75-1.23-4-2.37V8zM12 4c-4.97 0-9 4.03-9 9s4.02 9 9 9c4.97 0 9-4.03 9-9s-4.03-9-9-9zm0 16c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7z"></path>
+                    </Svg>
+                </SvgContainer>
+                <StatsValue>Time elapsed: {props.timer}</StatsValue>
+            </StatsItem>
+        </Stats>
     );
 }
 
-export default styled(GameStats)`
 
-    .stats {
-        display: flex;
-    }
-
-    .stats__item {
-        margin-right: 10px;
-    }
-`;
