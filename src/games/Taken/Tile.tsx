@@ -8,7 +8,7 @@ interface TileProps {
     correct: boolean;
     onClick?: () => void;
 }
-function Tile(props: TileProps) {
+function Tile(props: TileProps): JSX.Element {
 
     return (
         <div className={props.className} onClick={() => props.onClick && props.onClick()}>

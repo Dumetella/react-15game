@@ -6,6 +6,7 @@ import TileModel from './model/TileModel';
 import GameMenu from './GameMenu';
 import Grid from './Grid';
 import TakenMoveType from './enum/TakenMoveType';
+import GameStats from './GameStats';
 
 
 interface GameProps {
@@ -158,11 +159,11 @@ class TakenGame extends React.Component<GameProps, GameState> {
     private static arrowToMoves: {
         [key: string]: TakenMoveType | undefined
     } = {
-        'ArrowUp': TakenMoveType.Down,
-        'ArrowRight': TakenMoveType.Right,
-        'ArrowDown': TakenMoveType.Up,
-        'ArrowLeft': TakenMoveType.Left,
-    };
+            'ArrowUp': TakenMoveType.Down,
+            'ArrowRight': TakenMoveType.Right,
+            'ArrowDown': TakenMoveType.Up,
+            'ArrowLeft': TakenMoveType.Left,
+        };
 
     private onKeyDownEvent(ev: KeyboardEvent): void {
         console.log(ev);
@@ -217,12 +218,15 @@ class TakenGame extends React.Component<GameProps, GameState> {
                         : null
                 }
                 <GameMenu onClick={() => this.gameReset()}
-                    moves={totalMoves}
-                    timer={totalSeconds}
+
                 />
                 <Grid
                     level={currentLevel}
                     onClick={(tile) => this.onTileClick(tile)}
+                />
+                <GameStats
+                    moves={totalMoves}
+                    timer={totalSeconds}
                 />
             </div>
         );

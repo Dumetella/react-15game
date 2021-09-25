@@ -3,8 +3,6 @@ import styled from 'styled-components';
 
 interface GameMenuProps {
     onClick: () => void;
-    moves: number;
-    timer: number;
     className?: string;
 }
 
@@ -26,13 +24,6 @@ function GameMenu(props: GameMenuProps) {
                     Solve
                 </button>
             </div>
-            <div className="menu__item">
-                <div>Number of moves: {props.moves}</div>
-            </div>
-            <div className="menu__item">
-                <div>Time elapsed: {props.timer}</div>
-            </div>
-
         </div>
 
     );

@@ -2,7 +2,7 @@ import React from 'react';
 import Container from './ui/Container';
 import { MyFooter } from './FooterStyle';
 
-export default function Footer() {
+export default function Footer(): JSX.Element {
     return (
         <MyFooter>
             <Container>
