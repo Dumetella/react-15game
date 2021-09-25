@@ -1,23 +1,16 @@
 import React from 'react';
 import Container from './ui/Container';
-import styled from 'styled-components';
+import { MyFooter } from './FooterStyle';
 
-interface FooterProps {
-    className?: string;
-}
-function Footer(props: FooterProps) {
+export default function Footer() {
     return (
-        <footer className={props.className}>
+        <MyFooter>
             <Container>
                 React Games by Dumetella
             </Container>
-        </footer>
+        </MyFooter>
     );
 }
 
 
-export default styled(Footer)`
-    position: relative;
-    bottom: 0;
-    background-color: rgb(232, 232, 232);
-`;
+
