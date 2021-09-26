@@ -1,17 +1,12 @@
 import styled from 'styled-components';
 
 export const Nav = styled.nav`
-    width: 100%;
-    position: relative;
-    top: 0px;
     background-color: rgb(232, 232, 232);
-    z-index: 10;
     box-sizing: border-box;
-    height: 100px;
-`;
-
-export const LinksContainer = styled.div`
-
+    height: 70px;
+    display: flex;
+    align-items: center;
+    text-align: center;
 `;
 
 export const LinksList = styled.ul`
@@ -23,6 +18,7 @@ export const LinksList = styled.ul`
 export const LinksItem = styled.li`
     list-style: none;
     margin-right: 10px;
+
     a {
         text-decoration: none;
         font-size: 2rem;

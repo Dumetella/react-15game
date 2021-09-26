@@ -1,0 +1,117 @@
+.container {
+    position: relative;
+    width: 80px;
+    height: 80px;
+    overflow: hidden;
+    cursor: pointer;
+    z-index: 10;
+}
+.container::before {
+    content: "";
+    display: block;
+    margin-top: 100%;
+}
+.o,
+.b,
+.g {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    height: 30%;
+    width: 30%;
+    background-size: 66% 66%, 100% 100%;
+    background-repeat: no-repeat;
+    background-position: 100% 100%, 0px 0px;
+    transform-origin: top left;
+    transition: 0.5s cubic-bezier(0, 0, 0.3, 1) transform;
+}
+.noload .o,
+.noload .b,
+.noload .g,
+.noload .o::before,
+.noload .b::before,
+.noload .g::before,
+.noload .o::after,
+.noload .b::after,
+.noload .g::fter {
+    transition: none !important;
+}
+
+.o {
+    transform: rotate(-120deg) skewY(-30deg) scaleX(0.863) translate(15%, 15%) translateZ(1px);
+}
+.b {
+    transform: skewY(-30deg) scaleX(0.863) translate(15%, 15%) translateZ(1px);
+}
+.g {
+    transform: rotate(120deg) skewY(-30deg) scaleX(0.863) translate(15%, 15%) translateZ(1px);
+}
+.o::before,
+.b::before,
+.g::before,
+.o::after,
+.b::after,
+.g::after {
+    content: "";
+    position: absolute;
+    right: 0px;
+    bottom: 0px;
+    background-size: 50% 50%, 100% 100%;
+    background-repeat: no-repeat;
+    background-position: 100% 100%, 0px 0px;
+    transition: 0.5s ease-out transform;
+}
+.o::before,
+.b::before,
+.g::before {
+    height: 66%;
+    width: 66%;
+    transform: translate(33%, 33%);
+}
+.o::after,
+.b::after,
+.g::after {
+    height: 33%;
+    width: 33%;
+    transform: translate(100%, 100%);
+}
+.o,
+.o::before {
+    background-image: linear-gradient(0deg, #eaeaea, #eaeaea), linear-gradient(0deg, #e46c49, #e46c49);
+}
+.b,
+.b::before {
+    background-image: linear-gradient(0deg, #eaeaea, #eaeaea), linear-gradient(0deg, #4498bd, #4498bd);
+}
+.g,
+.g::before {
+    background-image: linear-gradient(0deg, #eaeaea, #eaeaea), linear-gradient(0deg, #96aa37, #96aa37);
+}
+.o::after {
+    background: #e46c49;
+}
+.b::after {
+    background: #4498bd;
+}
+.g::after {
+    background: #96aa37;
+}
+
+/* Change on hover */
+.container:hover .o {
+    transform: rotate(-120deg) skewY(-30deg) scaleX(0.863) translate(0%, 0%) translateZ(1px);
+}
+.container:hover .b {
+    transform: skewY(-30deg) scaleX(0.863) translate(0%, 0%) translateZ(1px);
+}
+.container:hover .g {
+    transform: rotate(120deg) skewY(-30deg) scaleX(0.863) translate(0%, 0%) translateZ(1px);
+}
+.container:hover .o::before,
+.container:hover .b::before,
+.container:hover .g::before,
+.container:hover .o::after,
+.container:hover .b::after,
+.container:hover .g::after {
+    transform: translate(0%, 0%);
+}
