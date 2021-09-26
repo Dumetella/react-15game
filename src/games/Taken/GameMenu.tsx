@@ -16,7 +16,6 @@ function GameMenu(props: GameMenuProps) {
                 </button>
             </div>
         </div>
-
     );
 }
 

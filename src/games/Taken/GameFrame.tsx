@@ -15,7 +15,7 @@ function GameFrame(props: GameFrameProps) {
 }
 
 export default styled(GameFrame)`
-    min-height: calc(100vh - 160px);
+    min-height: calc(100vh - 500px);
     min-width: 100vh;
     display: flex;
     justify-content: center;

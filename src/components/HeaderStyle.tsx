@@ -7,6 +7,7 @@ export const Nav = styled.nav`
     background-color: rgb(232, 232, 232);
     z-index: 10;
     box-sizing: border-box;
+    height: 100px;
 `;
 
 export const LinksContainer = styled.div`
