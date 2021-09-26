@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 23.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 400 400" style="enable-background:new 0 0 400 400;" xml:space="preserve">
+<style type="text/css">
+	.st0{display:none;}
+	.st1{display:inline;fill:#00FFFF;stroke:#B3B3B3;stroke-width:2;stroke-miterlimit:10;}
+	.st2{display:inline;}
+	.st3{fill:#00FFFF;stroke:#B3B3B3;stroke-width:2;stroke-miterlimit:10;}
+	.st4{fill:none;stroke:#DFE4F2;stroke-width:16;stroke-miterlimit:10;}
+</style>
+<g id="Layer_1">
+</g>
+<g id="grid" class="st0">
+	<line class="st1" x1="0.06" y1="200.32" x2="400" y2="200.32"/>
+	<line class="st1" x1="0.06" y1="300.16" x2="400" y2="300.16"/>
+	<path class="st1" d="M400,0.64"/>
+	<path class="st1" d="M0.06,0.64"/>
+	<line class="st1" x1="0.06" y1="100.48" x2="400" y2="100.48"/>
+	<path class="st1" d="M400,400"/>
+	<path class="st1" d="M0.06,400"/>
+	<line class="st1" x1="200.03" y1="0.64" x2="200.03" y2="400"/>
+	<line class="st1" x1="100.05" y1="0.64" x2="100.05" y2="400"/>
+	<path class="st1" d="M399.94,399.36"/>
+	<path class="st1" d="M399.94,0"/>
+	<line class="st1" x1="300.02" y1="0.64" x2="300.02" y2="400"/>
+	<path class="st1" d="M0,399.36"/>
+	<path class="st1" d="M0,0"/>
+</g>
+<g id="grid_2" class="st0">
+	<g class="st2">
+		<line class="st3" x1="0.02" y1="50.08" x2="100" y2="50.08"/>
+		<line class="st3" x1="0.02" y1="75.04" x2="100" y2="75.04"/>
+		<line class="st3" x1="0.02" y1="25.12" x2="100" y2="25.12"/>
+		<line class="st3" x1="50.01" y1="0.16" x2="50.01" y2="100"/>
+		<line class="st3" x1="25.01" y1="0.16" x2="25.01" y2="100"/>
+		<line class="st3" x1="75" y1="0.16" x2="75" y2="100"/>
+	</g>
+</g>
+<g id="patterns">
+	<g>
+		<path class="st4" d="M100,50C72.36,50,50,27.64,50,0"/>
+		<path class="st4" d="M0,50c27.64,0,50,22.36,50,50"/>
+	</g>
+	<g>
+		<path class="st4" d="M150,0c0,27.64-22.36,50-50,50"/>
+		<path class="st4" d="M150,100c0-27.64,22.36-50,50-50"/>
+	</g>
+	<g>
+		<path class="st4" d="M150,100c0,27.64-22.36,50-50,50"/>
+		<path class="st4" d="M150,200c0-27.64,22.36-50,50-50"/>
+	</g>
+	<g>
+		<path class="st4" d="M100,150c-27.64,0-50-22.36-50-50"/>
+		<path class="st4" d="M0,150c27.64,0,50,22.36,50,50"/>
+	</g>
+	<g>
+		<path class="st4" d="M100,250c-27.64,0-50-22.36-50-50"/>
+		<path class="st4" d="M0,250c27.64,0,50,22.36,50,50"/>
+	</g>
+	<g>
+		<path class="st4" d="M150,300c0-27.64,22.36-50,50-50"/>
+		<path class="st4" d="M150,200c0,27.64-22.36,50-50,50"/>
+	</g>
+	<g>
+		<path class="st4" d="M250,300c0-27.64,22.36-50,50-50"/>
+		<path class="st4" d="M250,200c0,27.64-22.36,50-50,50"/>
+	</g>
+	<g>
+		<path class="st4" d="M350,300c0-27.64,22.36-50,50-50"/>
+		<path class="st4" d="M350,200c0,27.64-22.36,50-50,50"/>
+	</g>
+	<g>
+		<path class="st4" d="M350,400c0-27.64,22.36-50,50-50"/>
+		<path class="st4" d="M350,300c0,27.64-22.36,50-50,50"/>
+	</g>
+	<g>
+		<path class="st4" d="M200,150c27.64,0,50,22.36,50,50"/>
+		<path class="st4" d="M300,150c-27.64,0-50-22.36-50-50"/>
+	</g>
+	<g>
+		<path class="st4" d="M200,50c27.64,0,50,22.36,50,50"/>
+		<path class="st4" d="M300,50c-27.64,0-50-22.36-50-50"/>
+	</g>
+	<g>
+		<path class="st4" d="M350,0c0,27.64-22.36,50-50,50"/>
+		<path class="st4" d="M350,100c0-27.64,22.36-50,50-50"/>
+	</g>
+	<g>
+		<path class="st4" d="M300,150c27.64,0,50,22.36,50,50"/>
+		<path class="st4" d="M400,150c-27.64,0-50-22.36-50-50"/>
+	</g>
+	<g>
+		<path class="st4" d="M200,350c27.64,0,50,22.36,50,50"/>
+		<path class="st4" d="M300,350c-27.64,0-50-22.36-50-50"/>
+	</g>
+	<g>
+		<path class="st4" d="M150,400c0-27.64,22.36-50,50-50"/>
+		<path class="st4" d="M150,300c0,27.64-22.36,50-50,50"/>
+	</g>
+	<g>
+		<path class="st4" d="M100,350c-27.64,0-50-22.36-50-50"/>
+		<path class="st4" d="M0,350c27.64,0,50,22.36,50,50"/>
+	</g>
+</g>
+</svg>
