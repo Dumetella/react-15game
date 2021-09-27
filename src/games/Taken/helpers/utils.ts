@@ -65,7 +65,7 @@ export const getField = (n: number): Array<TileModel> => {
         const tile2 = field.indexOf(2);
         [field[tile1], field[tile2]] = [field[tile2], field[tile1]];
     }
-    console.log(inversionCounter(field));
+    // console.log(inversionCounter(field));
     return [...field.map((e, i) => {
         return {
             x: i % n,

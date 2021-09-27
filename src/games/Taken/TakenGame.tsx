@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import TakenGameState from './enum/TakenGameState';
-import { gameFactory } from './helpers/gamefactory';
+import { gameFactory, GameField } from './helpers/gamefactory';
 import TileModel from './model/TileModel';
 import GameMenu from './GameMenu';
 import Grid from './Grid';
@@ -15,7 +15,7 @@ interface GameProps {
 }
 
 interface GameState {
-    currentLevel: ReturnType<typeof gameFactory>
+    currentLevel: GameField
     totalMoves: number
     totalSeconds: number
     gameState: TakenGameState
@@ -23,13 +23,10 @@ interface GameState {
 }
 
 class TakenGame extends React.Component<GameProps, GameState> {
-    private emptyTile: TileModel | null = null;
-    private moveTile: TileModel | null = null;
-
     constructor(props: GameProps) {
         super(props);
         this.state = {
-            currentLevel: [],
+            currentLevel: gameFactory(props.size),
             totalMoves: 0,
             totalSeconds: 0,
             gameState: TakenGameState.NotStarted,
@@ -40,7 +37,6 @@ class TakenGame extends React.Component<GameProps, GameState> {
     }
 
     componentDidMount(): void {
-        this.gameReset();
         document.addEventListener('keydown', this.onKeyDownEvent);
     }
 
@@ -50,25 +46,52 @@ class TakenGame extends React.Component<GameProps, GameState> {
     }
 
     componentDidUpdate(): void {
-        if (this.state.gameState !== TakenGameState.Solved && this.isPuzzleSolved(this.state.currentLevel)) {
+        if (this.state.gameState !== TakenGameState.Solved && this.isPuzzleSolved()) {
             this.setState({ gameState: TakenGameState.Solved });
             this.stopTimer();
         }
     }
 
     private onTileClick(tile: TileModel): void {
-        this.emptyTile = this.state.currentLevel.find((e) => e.value === -1) || null;
-        this.moveTile = tile;
+        const empty = this.state.currentLevel.empty;
 
-        const moveValid = [
-            TakenMoveType.Up,
-            TakenMoveType.Right,
-            TakenMoveType.Down,
-            TakenMoveType.Left,
-        ].some(c => this.makeMove(c));
+        if (tile.x === empty.x && tile.y === empty.y + 1) {
+            this.makeMove(tile, TakenMoveType.Up);
+        } else if (tile.x === empty.x + 1 && tile.y === empty.y) {
+            this.makeMove(tile, TakenMoveType.Right);
+        } else if (tile.x === empty.x && tile.y === empty.y - 1) {
+            this.makeMove(tile, TakenMoveType.Down);
+        } else if (tile.x === empty.x - 1 && tile.y === empty.y) {
+            this.makeMove(tile, TakenMoveType.Left);
+        }
+    }
 
-        if (moveValid) {
-            this.updatePostMove();
+    private onKeyDownEvent(ev: KeyboardEvent): void {
+        let tile: TileModel | undefined;
+        let move: TakenMoveType | undefined;
+        const {
+            empty,
+            tiles,
+        } = this.state.currentLevel;
+
+        if (ev.code === 'ArrowDown' || ev.code === 'KeyW') {
+            tile = tiles.find(c => c.x === empty.x && c.y === empty.y - 1);
+            move = TakenMoveType.Down;
+        } else if (ev.code === 'ArrowRight' || ev.code === 'KeyD') {
+            tile = tiles.find(c => c.x === empty.x - 1 && c.y === empty.y);
+            move = TakenMoveType.Right;
+        } else if (ev.code === 'ArrowUp' || ev.code === 'KeyS') {
+            tile = tiles.find(c => c.x === empty.x && c.y === empty.y + 1);
+            move = TakenMoveType.Up;
+        } else if (ev.code === 'ArrowLeft' || ev.code === 'KeyA') {
+            tile = tiles.find(c => c.x === empty.x + 1 && c.y === empty.y);
+            move = TakenMoveType.Left;
+        } else if (ev.code === 'KeyR') {
+            this.gameReset();
+        }
+
+        if (tile && move !== undefined) {
+            this.makeMove(tile, move);
         }
     }
 
@@ -81,8 +104,8 @@ class TakenGame extends React.Component<GameProps, GameState> {
         }
     }
 
-    private isPuzzleSolved(level: GameState['currentLevel']): boolean {
-        return level.filter(c => c.value > 0).every(c => c.value === c.y * this.props.size + c.x + 1);
+    private isPuzzleSolved(): boolean {
+        return this.state.currentLevel.tiles.filter(c => c.value > 0).every(c => c.value === c.y * this.props.size + c.x + 1);
     }
 
     private gameReset(): void {
@@ -95,49 +118,10 @@ class TakenGame extends React.Component<GameProps, GameState> {
         this.stopTimer();
     }
 
-    private isMoveValid(moveType: TakenMoveType): boolean {
-        if (!this.emptyTile || !this.moveTile) {
-            return false;
-        }
-
-        switch (moveType) {
-            case TakenMoveType.Up:
-                return this.moveTile.x === this.emptyTile.x && this.moveTile.y + 1 === this.emptyTile.y;
-            case TakenMoveType.Right:
-                return this.moveTile.x + 1 === this.emptyTile.x && this.moveTile.y === this.emptyTile.y;
-            case TakenMoveType.Down:
-                return this.moveTile.x === this.emptyTile.x && this.moveTile.y - 1 === this.emptyTile.y;
-            case TakenMoveType.Left:
-                return this.moveTile.x - 1 === this.emptyTile.x && this.moveTile.y === this.emptyTile.y;
-            default:
-                return false;
-        }
-    }
-
-    private makeMove(moveType: TakenMoveType): boolean {
-        if (!this.emptyTile || !this.moveTile || !this.isMoveValid(moveType)) {
-            return false;
-        }
-
-        console.log(moveType);
-
-        switch (moveType) {
-            case TakenMoveType.Down:
-            case TakenMoveType.Up:
-                [this.moveTile.y, this.emptyTile.y] = [this.emptyTile.y, this.moveTile.y];
-                break;
-            case TakenMoveType.Right:
-            case TakenMoveType.Left:
-                [this.moveTile.x, this.emptyTile.x] = [this.emptyTile.x, this.moveTile.x];
-                break;
-            default:
-                break;
-        }
-        return true;
-    }
-
-    private updatePostMove(): void {
-        if (this.state.gameState === TakenGameState.NotStarted) {
+    private makeMove(moveTile: TileModel, moveType: TakenMoveType): void {
+        if (this.state.gameState === TakenGameState.Solved) {
+            return;
+        } else if (this.state.gameState === TakenGameState.NotStarted) {
             this.setState({
                 gameState: TakenGameState.InProgress,
                 timer: setInterval(() => {
@@ -150,53 +134,28 @@ class TakenGame extends React.Component<GameProps, GameState> {
             });
         }
 
-        this.setState({
-            totalMoves: this.state.totalMoves + 1,
-            currentLevel: this.state.currentLevel.slice(),
-        });
-    }
-
-    private static arrowToMoves: {
-        [key: string]: TakenMoveType | undefined
-    } = {
-            'ArrowUp': TakenMoveType.Down,
-            'ArrowRight': TakenMoveType.Right,
-            'ArrowDown': TakenMoveType.Up,
-            'ArrowLeft': TakenMoveType.Left,
-        };
-
-    private onKeyDownEvent(ev: KeyboardEvent): void {
-        console.log(ev);
-        const move = TakenGame.arrowToMoves[ev.code] ?? null;
-
-        this.emptyTile = this.state.currentLevel.find((e) => e.value === -1) || null;
-        move !== null && this.findTileForMove(move) && this.makeMove(move) && this.updatePostMove();
-    }
-
-    private findTileForMove(moveType: TakenMoveType): boolean {
-        if (!this.emptyTile) {
-            return false;
-        }
-        const empty = this.emptyTile;
+        const emptyTile = this.state.currentLevel.empty;
 
         switch (moveType) {
+            case TakenMoveType.Down:
             case TakenMoveType.Up:
-                this.moveTile = this.state.currentLevel.find((e) => e.x === empty.x && e.y + 1 === empty.y) || null;
+                [moveTile.y, emptyTile.y] = [emptyTile.y, moveTile.y];
                 break;
             case TakenMoveType.Right:
-                this.moveTile = this.state.currentLevel.find((e) => e.x + 1 === empty.x && e.y === empty.y) || null;
-                break;
-            case TakenMoveType.Down:
-                this.moveTile = this.state.currentLevel.find((e) => e.x === empty.x && e.y - 1 === empty.y) || null;
-                break;
             case TakenMoveType.Left:
-                this.moveTile = this.state.currentLevel.find((e) => e.x - 1 === empty.x && e.y === empty.y) || null;
+                [moveTile.x, emptyTile.x] = [emptyTile.x, moveTile.x];
                 break;
             default:
                 break;
         }
 
-        return !!this.moveTile;
+        this.setState({
+            totalMoves: this.state.totalMoves + 1,
+            currentLevel: {
+                ...this.state.currentLevel,
+                tiles: this.state.currentLevel.tiles.slice()
+            },
+        });
     }
 
     render(): JSX.Element {
@@ -221,7 +180,7 @@ class TakenGame extends React.Component<GameProps, GameState> {
 
                 />
                 <Grid
-                    level={currentLevel}
+                    level={currentLevel.tiles}
                     onClick={(tile) => this.onTileClick(tile)}
                 />
                 <GameStats
