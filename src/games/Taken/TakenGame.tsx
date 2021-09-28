@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import TakenGameState from './enum/TakenGameState';
 import { gameFactory, GameField } from './helpers/gamefactory';
@@ -20,6 +20,7 @@ interface GameState {
     totalSeconds: number
     gameState: TakenGameState
     timer: ReturnType<typeof setInterval> | null
+    movesHistory: TakenMoveType[]
 }
 
 class TakenGame extends React.Component<GameProps, GameState> {
@@ -31,6 +32,7 @@ class TakenGame extends React.Component<GameProps, GameState> {
             totalSeconds: 0,
             gameState: TakenGameState.NotStarted,
             timer: null,
+            movesHistory: [],
         };
         // need to have reference to the func, for document.removeEventListener() to work
         this.onKeyDownEvent = this.onKeyDownEvent.bind(this);
@@ -155,6 +157,54 @@ class TakenGame extends React.Component<GameProps, GameState> {
                 ...this.state.currentLevel,
                 tiles: this.state.currentLevel.tiles.slice()
             },
+            movesHistory: [...this.state.movesHistory, moveType],
+        });
+    }
+
+    private undoMove(): void {
+        if (this.state.gameState === TakenGameState.Solved || this.state.movesHistory.length === 0) {
+            return;
+        }
+        const moveType = this.state.movesHistory.pop();
+        let moveTile: TileModel | undefined;
+
+        const {
+            empty,
+            tiles,
+        } = this.state.currentLevel;
+
+        //complete shitshow sorry
+        switch (moveType) {
+            case TakenMoveType.Down:
+                moveTile = tiles.find(c => c.x === empty.x && c.y === empty.y + 1);
+                if (!moveTile) { return; }
+                [moveTile.y, empty.y] = [empty.y, moveTile.y];
+                break;
+            case TakenMoveType.Up:
+                moveTile = tiles.find(c => c.x === empty.x && c.y === empty.y - 1);
+                if (!moveTile) { return; }
+                [moveTile.y, empty.y] = [empty.y, moveTile.y];
+                break;
+            case TakenMoveType.Right:
+                moveTile = tiles.find(c => c.x === empty.x - 1 && c.y === empty.y);
+                if (!moveTile) { return; }
+                [moveTile.x, empty.x] = [empty.x, moveTile.x];
+                break;
+            case TakenMoveType.Left:
+                moveTile = tiles.find(c => c.x === empty.x + 1 && c.y === empty.y);
+                if (!moveTile) { return; }
+                [moveTile.x, empty.x] = [empty.x, moveTile.x];
+                break;
+            default:
+                break;
+        }
+        this.setState({
+            totalMoves: this.state.totalMoves - 1,
+            currentLevel: {
+                ...this.state.currentLevel,
+                tiles: this.state.currentLevel.tiles.slice()
+            },
+            movesHistory: [...this.state.movesHistory],
         });
     }
 
@@ -176,8 +226,9 @@ class TakenGame extends React.Component<GameProps, GameState> {
                         </div>
                         : null
                 }
-                <GameMenu onClick={() => this.gameReset()}
-
+                <GameMenu
+                    onNewGameClick={() => this.gameReset()}
+                    onUndoMoveClick={() => this.undoMove()}
                 />
                 <Grid
                     level={currentLevel.tiles}

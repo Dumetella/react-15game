@@ -3,7 +3,8 @@ import styled from 'styled-components';
 import Button from '../../components/ui/Button';
 
 interface GameMenuProps {
-    onClick: () => void;
+    onNewGameClick: () => void;
+    onUndoMoveClick: () => void;
     className?: string;
 }
 
@@ -11,8 +12,11 @@ function GameMenu(props: GameMenuProps) {
     return (
         <div className={props.className}>
             <div className="menu__item">
-                <button onClick={props.onClick}>
+                <button onClick={props.onNewGameClick}>
                     NEW GAME
+                </button>
+                <button onClick={props.onUndoMoveClick}>
+                    Undo Move
                 </button>
             </div>
         </div>
