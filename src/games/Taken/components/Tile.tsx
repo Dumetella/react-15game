@@ -1,5 +1,5 @@
 import React from 'react';
-import TileModel from './model/TileModel';
+import TileModel from '../model/TileModel';
 import styled from 'styled-components';
 
 interface TileProps {

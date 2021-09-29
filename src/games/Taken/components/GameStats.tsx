@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Stats, StatsItem, StatsValue, Svg, SvgContainer } from './style/GameStatsStyle';
+import { Stats, StatsItem, StatsValue, Svg, SvgContainer } from '../style/GameStatsStyle';
 
 interface GameStatsProps {
     moves: number;

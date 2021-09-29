@@ -4,6 +4,10 @@ export const TileGrid = styled.div`
     position: relative;
     width: 440px;
     height: 440px;
+    @media ${(props) => props.theme.breakpoints.sm} {
+        width: 360px;
+        height: 360px;
+    }
 `;
 
 export const GridContainer = styled.div`

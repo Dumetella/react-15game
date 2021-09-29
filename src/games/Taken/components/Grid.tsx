@@ -1,8 +1,8 @@
 import React from 'react';
-import TileModel from './model/TileModel';
+import TileModel from '../model/TileModel';
 import Tile from './Tile';
 import styled from 'styled-components';
-import { TileGrid } from './style/TakenGameStyle';
+import { TileGrid } from '../style/TakenGameStyle';
 
 interface GridProps {
     level: TileModel[]

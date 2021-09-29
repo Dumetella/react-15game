@@ -1,7 +1,7 @@
 import React, { ReactNode } from 'react';
 
-import Button from '../../components/ui/Button';
-import { MenuContainer } from './style/GameMenuStyle';
+import Button from '../../../components/ui/Button';
+import { MenuContainer } from '../style/GameMenuStyle';
 
 interface GameMenuProps {
     onNewGameClick: () => void;

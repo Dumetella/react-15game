@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { LinksItem, LinksList, Nav } from './HeaderStyle';
+import { LinksItem, LinksList, Nav } from '../Style/HeaderStyle';
 import Logo from './Logo';
 
 import Container from './ui/Container';

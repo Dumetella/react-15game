@@ -3,10 +3,10 @@ import styled from 'styled-components';
 import TakenGameState from './enum/TakenGameState';
 import { gameFactory, GameField } from './helpers/gamefactory';
 import TileModel from './model/TileModel';
-import GameMenu from './GameMenu';
-import Grid from './Grid';
+import GameMenu from './components/GameMenu';
+import Grid from './components/Grid';
 import TakenMoveType from './enum/TakenMoveType';
-import GameStats from './GameStats';
+import GameStats from './components/GameStats';
 import { GameFrame, GridContainer } from './style/TakenGameStyle';
 
 
