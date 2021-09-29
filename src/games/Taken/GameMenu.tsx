@@ -1,16 +1,16 @@
-import React from 'react';
-import styled from 'styled-components';
+import React, { ReactNode } from 'react';
+
 import Button from '../../components/ui/Button';
+import { MenuContainer } from './style/GameMenuStyle';
 
 interface GameMenuProps {
     onNewGameClick: () => void;
     onUndoMoveClick: () => void;
-    className?: string;
 }
 
-function GameMenu(props: GameMenuProps) {
+export default function GameMenu(props: GameMenuProps): JSX.Element {
     return (
-        <div className={props.className}>
+        <MenuContainer>
             <div className="menu__item">
                 <button onClick={props.onNewGameClick}>
                     NEW GAME
@@ -19,12 +19,9 @@ function GameMenu(props: GameMenuProps) {
                     Undo Move
                 </button>
             </div>
-        </div>
+        </MenuContainer>
     );
 }
 
-export default styled(GameMenu)`
-    display:flex;
-    margin-bottom: 10px;
-`;
+
 

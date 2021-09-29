@@ -11,7 +11,9 @@ import Container from './ui/Container';
 export default function Header(): JSX.Element {
     return (
         <Nav>
-            <Logo />
+            <Link to="/">
+                <Logo />
+            </Link>
             <LinksList>
                 <LinksItem>
                     <Link to="/">React Games</Link>

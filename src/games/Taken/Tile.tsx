@@ -21,18 +21,25 @@ function Tile(props: TileProps): JSX.Element {
 export default styled(Tile)`
 
     border: 1px solid #FFD1AA;
-    width: 98px;
-    height: 98px;
+    width: 108px;
+    height: 108px;
     position: absolute;
     justify-content: center;
-    left: ${props => props.data.x * 100}px;
-    top: ${props => props.data.y * 100}px;
+    left: ${props => props.data.x * 110}px;
+    top: ${props => props.data.y * 110}px;
     cursor: pointer;
     background-color: ${props => props.correct ? '#226666' : '#D4726a'};
     transition-property: top, left, background-color;
     transition-duration: .300s;
     transition-timing-function: ease-in;
     display: ${props => props.data.value === -1 ? 'none' : 'flex'};
+
+    @media ${(props) => props.theme.breakpoints.sm} {
+        width: 88px;
+        height: 88px;
+        left: ${props => props.data.x * 90}px;
+        top: ${props => props.data.y * 90}px;
+    }
     
     .tile__value {
         color: #FFD1AA;

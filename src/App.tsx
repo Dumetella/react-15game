@@ -4,7 +4,7 @@ import Footer from './components/Footer';
 import Header from './components/Header';
 import Homepage from './pages/Homepage';
 import Takenpage from './pages/Takenpage';
-import styled from 'styled-components';
+import ThemeApplier from './components/ThemeApplier';
 
 
 
@@ -12,16 +12,16 @@ import styled from 'styled-components';
 function App(): JSX.Element {
 
   return (
-    <Router>
-      <div className="app">
+    <ThemeApplier>
+      <Router>
         <Header />
         <Switch>
           <Route exact path="/" component={Homepage} />
           <Route path="/taken-game" component={Takenpage} />
         </Switch>
         <Footer />
-      </div>
-    </Router>
+      </Router>
+    </ThemeApplier>
   );
 }
 

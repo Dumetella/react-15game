@@ -2,28 +2,20 @@ import React from 'react';
 import TileModel from './model/TileModel';
 import Tile from './Tile';
 import styled from 'styled-components';
-
-
+import { TileGrid } from './style/TakenGameStyle';
 
 interface GridProps {
     level: TileModel[]
-    className?: string;
     onClick: (tile: TileModel) => void;
 }
 
 
-function Grid(props: GridProps) {
+export default function Grid(props: GridProps): JSX.Element {
 
     return (
-        <div className={props.className}>
+        <TileGrid>
             {props.level.map((e, i) => <Tile onClick={() => props.onClick(e)} correct={e.value === e.y * 4 + e.x + 1} key={i} data={e} />)}
-        </div>
+        </TileGrid>
     );
 }
 
-
-export default styled(Grid)`
- position: relative;
- min-width: 400px;
- min-height: 400px;
- `;

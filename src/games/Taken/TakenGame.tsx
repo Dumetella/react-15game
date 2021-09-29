@@ -7,11 +7,11 @@ import GameMenu from './GameMenu';
 import Grid from './Grid';
 import TakenMoveType from './enum/TakenMoveType';
 import GameStats from './GameStats';
+import { GameFrame, GridContainer } from './style/TakenGameStyle';
 
 
 interface GameProps {
     size: number
-    className?: string;
 }
 
 interface GameState {
@@ -23,7 +23,7 @@ interface GameState {
     movesHistory: TakenMoveType[]
 }
 
-class TakenGame extends React.Component<GameProps, GameState> {
+export default class TakenGame extends React.Component<GameProps, GameState> {
     constructor(props: GameProps) {
         super(props);
         this.state = {
@@ -217,34 +217,32 @@ class TakenGame extends React.Component<GameProps, GameState> {
         } = this.state;
 
         return (
-            <div className={this.props.className}>
-                {
-                    gameState === TakenGameState.Solved
-                        ? <div>
-                            <h2>YOU WON</h2>
-                            <button onClick={() => this.gameReset()}>Restart</button>
-                        </div>
-                        : null
-                }
-                <GameMenu
-                    onNewGameClick={() => this.gameReset()}
-                    onUndoMoveClick={() => this.undoMove()}
-                />
-                <Grid
-                    level={currentLevel.tiles}
-                    onClick={(tile) => this.onTileClick(tile)}
-                />
-                <GameStats
-                    moves={totalMoves}
-                    timer={totalSeconds}
-                />
-            </div>
+            <GameFrame>
+                <GridContainer>
+                    {
+                        gameState === TakenGameState.Solved
+                            ? <div>
+                                <h2>YOU WON</h2>
+                                <button onClick={() => this.gameReset()}>Restart</button>
+                            </div>
+                            : null
+                    }
+                    <GameMenu
+                        onNewGameClick={() => this.gameReset()}
+                        onUndoMoveClick={() => this.undoMove()}
+                    />
+                    <Grid
+                        level={currentLevel.tiles}
+                        onClick={(tile) => this.onTileClick(tile)}
+                    />
+                    <GameStats
+                        moves={totalMoves}
+                        timer={totalSeconds}
+                    />
+                </GridContainer>
+            </GameFrame>
         );
     }
 }
 
-export default styled(TakenGame)`
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-`;
+
