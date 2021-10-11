@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import Button from '../../../components/ui/Button';
 
 export const TileGrid = styled.div`
     position: relative;
@@ -26,3 +27,5 @@ export const GameFrame = styled.div`
         margin: 20px 0px 10px 10px;
     }
 `;
+
+

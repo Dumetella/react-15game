@@ -5,6 +5,7 @@ import Header from './components/Header';
 import Homepage from './pages/Homepage';
 import Takenpage from './pages/Takenpage';
 import ThemeApplier from './components/ThemeApplier';
+import Sudokupage from './pages/Sudokupage';
 
 
 
@@ -18,6 +19,7 @@ function App(): JSX.Element {
         <Switch>
           <Route exact path="/" component={Homepage} />
           <Route path="/taken-game" component={Takenpage} />
+          <Route path="/sudoku-game" component={Sudokupage} />
         </Switch>
         <Footer />
       </Router>

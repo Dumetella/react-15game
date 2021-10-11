@@ -1,9 +1,23 @@
 import React from 'react';
+import styled from 'styled-components';
 
-export default function Modal() {
+interface ModalProps {
+    visible: boolean;
+    onClick?: () => void;
+    className?: string;
+}
+
+export default function Modal(props: ModalProps): JSX.Element {
     return (
-        <div>
+        <>
+            {props.visible ?
 
-        </div>
+                <div className={props.className}>
+                    <h1>ABOBA</h1>
+                    <button onClick={props.onClick}>X</button>
+                </div>
+
+                : null}
+        </>
     );
 }

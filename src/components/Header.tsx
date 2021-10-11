@@ -19,7 +19,10 @@ export default function Header(): JSX.Element {
                     <Link to="/">React Games</Link>
                 </LinksItem>
                 <LinksItem>
-                    <Link to="/taken-game">Taken-puzzle</Link>
+                    <Link to="/taken-game">Taken</Link>
+                </LinksItem>
+                <LinksItem>
+                    <Link to="/sudoku-game">Sudoku</Link>
                 </LinksItem>
             </LinksList>
         </Nav>

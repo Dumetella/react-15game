@@ -1,5 +1,4 @@
 import React from 'react';
-import styled from 'styled-components';
 import TakenGameState from './enum/TakenGameState';
 import { gameFactory, GameField } from './helpers/gamefactory';
 import TileModel from './model/TileModel';
@@ -8,6 +7,7 @@ import Grid from './components/Grid';
 import TakenMoveType from './enum/TakenMoveType';
 import GameStats from './components/GameStats';
 import { GameFrame, GridContainer } from './style/TakenGameStyle';
+import Modal from '../../components/ui/Modal';
 
 
 interface GameProps {
